@@ -1,8 +1,8 @@
 {
   "goods": [
     {
-      "id": 1,
-      "name": "Milk"
+      "name": "Milk",
+      "id": 1
     },
     {
       "id": 2,

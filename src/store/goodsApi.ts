@@ -7,7 +7,12 @@ export const goodsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001/'}),
     endpoints: (build) => ({
         getGoods: build.query<ProductList, string>({
-            query: (limit='') => `goods?${limit && `_limit=${limit}`}`,
+            query: (limit='') => ({
+                url: 'goods',
+                params: {
+                    _limit: limit,
+                }
+            }),
             providesTags: (result) => result 
                 ? [
                     ...result.map(({id}) => ({ type: 'Products' as const, id })),
@@ -33,7 +38,7 @@ export const goodsApi = createApi({
         updateProduct: build.mutation<Product, Partial<Product> & Pick<Product, 'id'>>({
             query: ({id, ...body}) => ({
                 url: `goods/${id}`,
-                method: 'PATCH',
+                method: 'PUT',
                 body,
             }),
             invalidatesTags: [{type: 'Products', id: 'LIST'}]
