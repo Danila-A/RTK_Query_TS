@@ -11,7 +11,7 @@ export function App() {
   const [inputVisible, setInputVisible] = useState(false);
   const [idProduct, setIdProduct] = useState<number>(0);
 
-  const { data=[], isLoading } = useGetGoodsQuery(count);
+  const { data=[], isFetching } = useGetGoodsQuery(count);
   const [addProduct, {}] = useAddProductMutation();
   const [deleteProduct, {}] = useDeleteProductMutation();
   const [updateProduct, {}] = useUpdateProductMutation();
@@ -45,7 +45,7 @@ export function App() {
     setUpdatedProduct(data.filter((item) => item.id === id)[0].name);
   }
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isFetching) return <h1>Loading...</h1>
 
   return (
     <div className="">
